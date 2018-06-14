@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Symbol Prediction Game</title>
+      <!--Icon of web page-->
+      <link rel="icon" type="image/png" href="img/icon.png">
+      <!--SAS-->
+      <link rel="stylesheet" href="scss/main.css">
+      <!--Font Awesome-->
+      <link rel="stylesheet" href="css/font-awesome.css">
+  </head>
+  <body>   
+      <audio id="myAudio"  autoplay allow="autoplay">
+        <source src="music/2.mp3" type="audio/mpeg">
+        <source src="music/1.mp3" type="audio/mpeg">
+      </audio>
+       <!--loader starts-->
+      <div class="progress-bar"></div>
+      <div class="percentage">
+        <div class="circle"></div>
+        <span class="value">0</span>
+      </div>
+      <!--loader ends-->
+      <!--Information about the game-->
+      <div class="information hide">
+        <p>
+          Welcome to the Symbol-Prediction game .The purpose of this game is  predicting two locations in order to find the same number pairs.  The first guess chance was given to you.Evaluate this chance . Each correct prediction would bring one point to the computer or the player who made the right prediction. If the player or the computer collects more points than the half of the number pairs, player/computer will win the game.Good luck!
+        </p>
+        <span class="close">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
+      </div>
+      <!--Information icon-->
+      <div class="info hide">
+        <span>
+          <i class="fa fa-info" aria-hidden="true"></i>
+        </span>
+      </div>
+      <div class="main hide">
+          <!--back button -->
+          <div id="turnBack">
+            <span>
+              <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            </span>
+          </div>
+          <!--Introduction of the game-->
+          <div class="introduction">
+            <h1>
+              SYMBOL PREDICTION GAME
+            </h1>
+            <span class="play">
+              <i  class="fa fa-play-circle " aria-hidden="true"></i>
+            </span>
+          </div>
+          <!--Select the board size of the game-->  
+          <div class="enterance">
+              <h1>
+                  WELCOME, PLEASE SELECT THE BOARD SIZE!
+              </h1>
+              <!-- Create radio buttons in order to select the size of the board -->
+              <form>
+                <input type="radio" id="weak" name="size" value="4" style="margin-left:0px;">4
+                <input type="radio" id="medium" name="size" value="6" >6
+                <input type="radio" id="strong" name="size" value="8">8  
+                <input type="radio" id="advanced" name="size" value="10">10 
+              </form>  
+              <button  class="select">SELECT</button>        
+          </div>
+          <!--Mute the game music-->
+          <div class="mute">
+            <span id="muteBtn" onclick="pause()">
+              <i class="fa fa-volume-up " id="volumeUp" aria-hidden="true" ></i>
+            </span>
+            <span id="muteBtn" onclick="play()">
+              <i  class="fa fa-volume-off " id="volumeOff" aria-hidden="true"></i>
+            </span>
+          </div>
+          <!--Select the level of the game-->
+          <div class="level">
+            <h1>
+              PLEASE SELECT THE LEVEL OF THE GAME!
+            </h1>
+              <form>
+                <input type="radio" id="weakLevel" name="level" value="beginner" style="margin-left:0px;"><span>beginner</span>
+                <input type="radio" id="mediumLevel" name="level" value="intermediate" ><span>intermediate</span>
+                <input type="radio" id="strongLevel" name="level" value="advanced"><span>advanced</span>
+                <input type="radio" id="advancedLevel" name="level" value="professional"><span>professional</span> 
+              </form>        
+            <button class="slctLvl">SELECT</button>
+          </div>
+          <!--Some steps during the game-->
+          <div class="step">
+              <h1>
+                  Please select two locations!
+              </h1>
+              <h2>Please wait  computer is guessing....</h2>
+          </div>
+          <!--Messages-->
+          <p class="playerWon">
+            Congratulations! You won the game!
+          </p>
+          <p class="pcWon">
+            Pc won the game! Please try again...
+          </p>
+          <p class="draw">
+            Draw!
+          </p>
+          <!--Score table-->
+          <div class="scoreTable">
+            <table>
+              <tr>
+                <th>Player score</th>
+                <th>Pc score</th>
+              </tr>
+              <tr>
+                <td class="playerScore">0</td>
+                <td class="pcScore">0</td>
+
+              </tr>
+            </table>
+          </div>
+          <!-- Create 4*4 table -->
+          <div id="weakBoard" class="brd">            
+            <table id="weakTable" border="2" cellpadding="0" cellspacing="0">
+              <!--First row-->
+                <tr class="row" data-index="0">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr> 
+                <!--Second row-->
+                <tr class="row" data-index="1">
+                  <td class="column" data-index="0";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="1";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="2";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="3";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>  
+                <!--Third row-->
+                <tr class="row" data-index="2">
+                  <td class="column" data-index="0";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="1";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="2";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="3";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Fourth row-->
+                <tr class="row" data-index="3">
+                  <td class="column" data-index="0";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="1";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="2";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <td class="column" data-index="3";>
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>        
+            </table>
+          </div>
+          <!-- Create 6*6 able -->
+          <div id="mediumBoard" class="brd">            
+            <table id="mediumTable" border="2" cellpadding="0" cellspacing="0">
+                <!--First row-->
+                <tr class="row" data-index="0">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr> 
+                <!--Second row-->
+                <tr class="row" data-index="1">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>  
+                <!--Third row-->
+                <tr class="row" data-index="2">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Fourth row-->
+                <tr class="row" data-index="3">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+               <!--Fifth row-->
+                <tr class="row" data-index="4">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Sixth row-->
+                <tr class="row" data-index="5">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+            </table>
+          </div>  
+          <!-- Create 8*8 table -->
+          <div id="strongBoard" class="brd">            
+            <table  id="strongTable" border="2" cellpadding="0" cellspacing="0">
+                <!--First row-->
+                <tr class="row" data-index="0">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr> 
+                <!--Second row-->
+                <tr class="row" data-index="1">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>  
+                <!--Third row-->
+                <tr class="row" data-index="2">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Fourth row-->
+                <tr class="row" data-index="3">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Fifth row-->
+                <tr class="row" data-index="4">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr> 
+                <!--Sixth row-->
+                <tr class="row" data-index="5">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>  
+                <!--Seventh row-->
+                <tr class="row" data-index="6">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Eights row-->
+                <tr class="row" data-index="7">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>       
+            </table>
+          </div>
+          <!-- Create 10*10 table -->
+          <div id="advancedBoard" class="brd">            
+            <table  id="advancedTable" border="2" cellpadding="0" cellspacing="0">
+                <!--First row-->
+                <tr class="row" data-index="0">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr> 
+                <!--Second row-->
+                <tr class="row" data-index="1">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>  
+                <!--Third row-->
+                <tr class="row" data-index="2">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Fourth row-->
+                <tr class="row" data-index="3">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Fifth row-->
+                <tr class="row" data-index="4">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr> 
+                <!--Sixth row-->
+                <tr class="row" data-index="5">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>  
+                <!--Seventh row-->
+                <tr class="row" data-index="6">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Eights row-->
+                <tr class="row" data-index="7">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>      
+                <!--Nineth row-->
+                <tr class="row" data-index="8">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+                <!--Tens row-->
+                <tr class="row" data-index="9">
+                  <!--First column-->
+                  <td class="column" data-index="0";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Second Column-->
+                  <td class="column" data-index="1";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Third column-->
+                  <td class="column" data-index="2";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fourth column-->
+                  <td class="column" data-index="3";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Fifth column-->
+                  <td class="column" data-index="4";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Sixth column-->
+                  <td class="column" data-index="5";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Seventh column-->
+                  <td class="column" data-index="6";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Eights column-->
+                  <td class="column" data-index="7";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Nineth column-->
+                  <td class="column" data-index="8";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                  <!--Tens column-->
+                  <td class="column" data-index="9";> 
+                    <span class="star">
+                      *
+                    </span>
+                  </td>
+                </tr>   
+            </table>
+          </div> 
+          <div class="restart">
+            <button id="restartGame">
+              RESTART
+            </button>
+          </div>
+      </div>
+  </body>
+</html>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+<script src="js/main.js"></script>

@@ -1,0 +1,562 @@
+body {
+  background-image: url("../img/background.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  background-color: initial !important; }
+
+#music {
+  position: absolute;
+  visibility: hidden; }
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.circle {
+  width: 10em;
+  height: 10em;
+  position: relative;
+  border-radius: 50%;
+  background: linear-gradient(to right, #ccc 10%, rgba(204, 204, 204, 0) 42%);
+  animation: rotate 1.4s infinite linear; }
+
+.circle:before {
+  width: 50%;
+  height: 50%;
+  background: #ccc;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: ''; }
+
+.circle:after {
+  background: whitesmoke;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0; }
+
+.percentage {
+  position: absolute;
+  top: 33%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 162px; }
+
+.percentage .value {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 64px;
+  left: 30px;
+  top: 42px;
+  right: 0;
+  color: darkred;
+  font-size: 46px; }
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 5px;
+  background: #C00F23;
+  position: fixed; }
+
+.hide {
+  display: none; }
+
+#turnBack {
+  position: absolute;
+  display: none;
+  color: white;
+  font-size: 45px;
+  width: 25px;
+  height: 20px;
+  bottom: 324px;
+  top: 0;
+  left: 3em;
+  margin: auto;
+  z-index: 9999999; }
+  #turnBack span i {
+    cursor: pointer; }
+  #turnBack span i:hover {
+    animation: pulse_animation 1s infinite; }
+@keyframes pulse_animation {
+  0% {
+    transform: scale(1); }
+  30% {
+    transform: scale(1); }
+  40% {
+    transform: scale(1.08); }
+  50% {
+    transform: scale(1); }
+  60% {
+    transform: scale(1); }
+  70% {
+    transform: scale(1.05); }
+  80% {
+    transform: scale(1); }
+  100% {
+    transform: scale(1); } }
+.introduction {
+  position: relative;
+  top: 40px;
+  font-size: 38px;
+  width: auto;
+  text-align: center;
+  color: white; }
+  .introduction span {
+    width: auto;
+    height: auto;
+    position: relative;
+    top: 30px;
+    font-size: 2.5em;
+    cursor: pointer; }
+    .introduction span i:hover {
+      animation: pulse_animation 1s infinite; }
+@keyframes pulse_animation {
+  0% {
+    transform: scale(1); }
+  30% {
+    transform: scale(1); }
+  40% {
+    transform: scale(1.08); }
+  50% {
+    transform: scale(1); }
+  60% {
+    transform: scale(1); }
+  70% {
+    transform: scale(1.05); }
+  80% {
+    transform: scale(1); }
+  100% {
+    transform: scale(1); } }
+.info, .mute {
+  height: 0;
+  position: absolute;
+  top: 0;
+  padding: 10px 5px;
+  font-size: 50px;
+  cursor: pointer; }
+  .info span, .mute span {
+    height: 0; }
+    .info span i, .mute span i {
+      height: 0;
+      color: white; }
+
+.information {
+  display: flex;
+  position: absolute;
+  top: -70%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  z-index: 1;
+  width: 27%;
+  padding: 10px;
+  font-size: 27px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  background-color: darkslategray;
+  visibility: hidden; }
+  .information span {
+    height: 0;
+    position: relative;
+    right: 7px;
+    bottom: 2px;
+    cursor: pointer; }
+    .information span i {
+      color: white; }
+    .information span i:hover {
+      transition: 0.4s;
+      color: #EC3E0C; }
+
+.mute {
+  right: 0; }
+  .mute #volumeOff {
+    display: none;
+    position: relative;
+    right: 25px; }
+
+.enterance {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: auto;
+  top: 61.5px;
+  height: 190px;
+  display: none;
+  cursor: default;
+  text-align: center;
+  text-transform: uppercase; }
+  .enterance h1 {
+    padding: 20px;
+    color: white;
+    font-size: 2em; }
+  .enterance form {
+    font-size: 25px;
+    color: white; }
+    .enterance form input {
+      margin-left: 145px;
+      margin-top: 45px; }
+  .enterance .select {
+    background: #EC3E0C;
+    border-color: #EC3E0C;
+    color: white;
+    padding: 10px;
+    margin-top: 65px;
+    font-size: 20px;
+    border-radius: 12px; }
+
+.level {
+  position: absolute;
+  top: 11.7%;
+  right: 0;
+  left: 0;
+  text-align: center;
+  display: none; }
+  .level h1 {
+    color: white; }
+  .level .slctLvl {
+    position: relative;
+    top: 57px;
+    background: #EC3E0C;
+    border-color: #EC3E0C;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 12px; }
+  .level form {
+    position: relative;
+    font-size: 24px;
+    color: white; }
+    .level form input {
+      margin-left: 145px;
+      margin-top: 45px; }
+
+.step {
+  padding-top: 55px;
+  display: none; }
+  .step h1 {
+    position: relative;
+    top: 38px;
+    text-align: center;
+    font-size: 44px;
+    color: white;
+    text-transform: uppercase;
+    margin: 0 !important;
+    padding: 0 !important; }
+  .step h2 {
+    display: none;
+    position: relative;
+    top: 38px;
+    text-align: center;
+    font-size: 44px;
+    color: white;
+    text-transform: uppercase;
+    margin: 0 !important;
+    padding: 0 !important; }
+
+.playerWon, .pcWon, .draw {
+  display: none;
+  position: relative;
+  top: 19px;
+  left: 0;
+  right: 0;
+  font-size: 25px;
+  text-align: center;
+  color: white; }
+
+.scoreTable {
+  display: none;
+  position: absolute;
+  top: 11em;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+  color: white; }
+  .scoreTable table {
+    width: 25em;
+    border-collapse: collapse;
+    font-size: 26px;
+    text-align: center;
+    margin: auto;
+    border: 3px solid; }
+    .scoreTable table th, .scoreTable table td {
+      border: 3px solid;
+      padding-bottom: 5px;
+      border: 3px solid; }
+    .scoreTable table th {
+      width: 50%; }
+
+#weakBoard, #mediumBoard, #strongBoard, #advancedBoard {
+  margin-bottom: 40px;
+  position: absolute;
+  top: 17em;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  display: none; }
+  #weakBoard table, #mediumBoard table, #strongBoard table, #advancedBoard table {
+    margin-bottom: 55px;
+    position: relative;
+    top: 7px;
+    width: 400px;
+    border-color: white;
+    border-collapse: collapse; }
+    #weakBoard table td, #mediumBoard table td, #strongBoard table td, #advancedBoard table td {
+      width: 12%;
+      text-align: center;
+      font-size: 40px;
+      color: white;
+      cursor: pointer; }
+
+#mediumBoard table {
+  width: 650px !important; }
+
+#strongBoard table {
+  width: 650px !important; }
+
+#advancedBoard table {
+  width: 57em !important; }
+  #advancedBoard table td {
+    width: 90px !important; }
+
+.restart {
+  display: none;
+  position: absolute;
+  bottom: 212px;
+  left: 0;
+  right: 0px;
+  margin: auto;
+  width: 119px;
+  height: 60px; }
+  .restart button {
+    background: #EC3E0C;
+    border-color: #EC3E0C;
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer; }
+
+@media screen and (min-width: 267px) and (max-width: 490px) {
+  #turnBack {
+    font-size: 33px;
+    left: 0px;
+    bottom: 422px; } }
+@media screen and (min-width: 490px) and (max-width: 696px) {
+  #turnBack {
+    font-size: 33px;
+    left: 0px;
+    bottom: 322px; } }
+@media screen and (min-width: 696px) and (max-width: 1480px) {
+  #turnBack {
+    font-size: 33px;
+    left: 0px;
+    bottom: 382px; } }
+@media screen and (min-width: 267px) and (max-width: 1312px) {
+  body {
+    background-size: initial; } }
+@media screen and (min-width: 267px) and (max-width: 571px) {
+  .mute #volumeOff {
+    right: 17px; }
+
+  .introduction {
+    top: 70px;
+    font-size: 18px; }
+    .introduction .play {
+      top: 5px; }
+
+  .info, .mute {
+    font-size: 35px; }
+
+  .information {
+    width: 85%;
+    right: 10px;
+    font-size: 18px; }
+
+  .enterance {
+    left: 0; }
+    .enterance h1 {
+      font-size: 18px; }
+    .enterance form input {
+      margin-left: 32px; }
+    .enterance .select {
+      margin-top: 50px;
+      font-size: 18px; }
+
+  .step h1, .step h2 {
+    top: 25px;
+    font-size: 21px; }
+
+  .scoreTable {
+    top: 10.2em; }
+    .scoreTable table {
+      width: 14.5em !important;
+      font-size: 17px; }
+
+  #weakBoard table, #mediumBoard table, #strongBoard table, #advancedBoard table {
+    width: 247px; }
+
+  #mediumBoard table {
+    width: 250px !important; }
+    #mediumBoard table td {
+      width: 16.5% !important; }
+
+  #strongBoard table {
+    width: 260px !important; }
+    #strongBoard table td {
+      font-size: 26px !important; }
+
+  #advancedBoard table {
+    width: 260px !important; }
+    #advancedBoard table td {
+      width: 10% !important;
+      font-size: 16px !important; } }
+@media screen and (min-width: 531px) and (max-width: 850px) {
+  #strongBoard table {
+    width: 527px !important; }
+    #strongBoard table td {
+      font-size: 36px !important; }
+
+  #advancedBoard table {
+    width: 527px !important; }
+    #advancedBoard table td {
+      font-size: 26px !important; } }
+@media screen and (min-width: 850px) and (max-width: 1068px) {
+  .information {
+    width: 65%; }
+
+  #advancedBoard {
+    margin-bottom: 20px;
+    top: 18em; }
+    #advancedBoard table {
+      width: 50em !important; }
+      #advancedBoard table td {
+        width: 10% !important;
+        font-size: 36px !important; }
+
+  .scoreTable {
+    top: 12.5em; }
+    .scoreTable table {
+      width: 31.5em !important;
+      font-size: 19px; } }
+@media screen and (min-width: 267px) and (max-width: 490px) {
+  .level {
+    left: 0;
+    right: 2px; }
+    .level h1 {
+      font-size: 18px; }
+    .level form {
+      display: inline-grid; }
+      .level form input {
+        margin-left: 0; }
+      .level form span {
+        margin-top: -21px;
+        margin-left: 30px; }
+    .level .slctLvl {
+      top: 98px;
+      left: 0;
+      font-size: 18px; } }
+@media screen and (min-width: 267px) and (max-width: 397px) {
+  .level form {
+    right: 16px; } }
+@media screen and (min-width: 329px) and (max-width: 387px) {
+  .level form {
+    right: 34px; } }
+@media screen and (min-width: 387px) and (max-width: 490px) {
+  .level form {
+    right: 39px; }
+  .level .slctLvl {
+    left: 39px; } }
+@media screen and (min-width: 490px) and (max-width: 520px) {
+  .level form {
+    display: initial;
+    font-size: 18px; }
+    .level form input {
+      margin-left: 21px; }
+    .level form span {
+      margin-left: 0; } }
+@media screen and (min-width: 520px) and (max-width: 615px) {
+  .level form {
+    display: initial;
+    font-size: 20px; }
+  .level input {
+    margin-left: 21px !important; }
+  .level span {
+    margin-left: 0; } }
+@media screen and (min-width: 615px) and (max-width: 691px) {
+  .level form {
+    font-size: 26px; }
+  .level input {
+    margin-left: 21px !important; }
+  .level span {
+    margin-left: 0; } }
+@media screen and (min-width: 691px) and (max-width: 930px) {
+  .level form {
+    font-size: 28px; }
+  .level input {
+    margin-left: 30px !important; }
+  .level span {
+    margin-left: 0; } }
+@media screen and (min-width: 571px) and (max-width: 855px) {
+  .introduction {
+    top: 70px;
+    font-size: 26px; }
+    .introduction .play {
+      top: 5px; }
+
+  .info, .mute {
+    font-size: 45px; }
+
+  .information {
+    width: 95%;
+    right: 6px;
+    font-size: 20px; }
+
+  .enterance h1 {
+    font-size: 26px; }
+  .enterance form input {
+    margin-left: 123px; }
+  .enterance .select {
+    margin-top: 50px;
+    font-size: 18px; }
+
+  .step h1, .step h2 {
+    top: 60px;
+    font-size: 21px; }
+
+  .scoreTable {
+    top: 11.5em; }
+    .scoreTable table {
+      width: 15.5em !important;
+      font-size: 19px; }
+
+  #weakBoard table, #mediumBoard table, #strongBoard table, #advancedBoard table {
+    width: 300px; }
+
+  #mediumBoard {
+    left: 0 !important; }
+    #mediumBoard table {
+      width: 300px !important; }
+      #mediumBoard table td {
+        width: 16% !important; }
+
+  #advancedBoard table td {
+    width: 10% !important; } }
+
+/*# sourceMappingURL=main.css.map */
